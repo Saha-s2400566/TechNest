@@ -158,41 +158,47 @@
     {% endblock %}
 
     <!-- footer -->
-    <footer>
-        <div id="contact" class="footer">
-            <div class="container">
-                <div class="row pdn-top-30">
-                    <div class="col-md-12 ">
-                        <div class="footer-box">
-                            <div class="headinga">
-                                <h3>Address</h3>
-                                <span>Rhombus Street</span>
-                                <p>(+960) 9921632
-                                    <br>Technest@gmail.com
-                                </p>
-                            </div>
-                            <ul class="location_icon">
-                                <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                                <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                            <div class="menu-bottom">
-                                <ul class="link">
-                                    <li><a href="{% url 'index' %}">Home</a></li>
-                                    <li><a href="{% url 'about' %}">About</a></li>
-                                    <li><a href="{% url 'products' %}">Product</a></li>
-                                    <li><a href="{% url 'cart' %}">Cart</a></li>
-                                    <li><a href="{% url 'contact' %}">Contact us</a></li>
-                                </ul>
-                            </div>
-                        </div>
+    <footer
+        style="background: var(--color-space-gray); padding: 2rem 0; margin-top: 4rem; border-top: 1px solid rgba(0, 240, 255, 0.2);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center text-md-left mb-3 mb-md-0">
+                    <span class="neon-text" style="font-size: 1.3rem; font-weight: 700;">TECHNEST</span>
+                    <p style="color: var(--color-mid-gray); margin: 0.5rem 0 0 0; font-size: 0.9rem;">Cutting-edge
+                        technology solutions</p>
+                </div>
+
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="{% url 'index' %}"
+                            style="color: var(--color-mid-gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Home</a>
+                        <a href="{% url 'about' %}"
+                            style="color: var(--color-mid-gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">About</a>
+                        <a href="{% url 'products' %}"
+                            style="color: var(--color-mid-gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Products</a>
+                        <a href="{% url 'contact' %}"
+                            style="color: var(--color-mid-gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Contact</a>
+                        <a href="{% url 'policy' %}"
+                            style="color: var(--color-mid-gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">Privacy</a>
                     </div>
                 </div>
-            </div>
-            <div class="copyright">
-                <div class="container">
-                    <p>© 2024 All Rights Reserved by Technest
-                        <a href="{% url 'policy' %}">View Policy</a>
+
+                <div class="col-md-4 text-center text-md-right">
+                    <div style="display: flex; gap: 0.75rem; justify-content: center; align-items: center;">
+                        <a href="#"
+                            style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-neon-cyan); border-radius: 50%; color: var(--color-neon-cyan); text-decoration: none; transition: all 0.3s; font-size: 0.9rem;">
+                            <i class="fa fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-neon-cyan); border-radius: 50%; color: var(--color-neon-cyan); text-decoration: none; transition: all 0.3s; font-size: 0.9rem;">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-neon-cyan); border-radius: 50%; color: var(--color-neon-cyan); text-decoration: none; transition: all 0.3s; font-size: 0.9rem;">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>
+                    <p style="color: var(--color-mid-gray); margin: 0.75rem 0 0 0; font-size: 0.85rem;">© 2024 TECHNEST
                     </p>
                 </div>
             </div>
