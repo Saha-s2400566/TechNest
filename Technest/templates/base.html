@@ -217,30 +217,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="copyright">
-                    <div class="container">
-                        <p>© 2024 All Rights Reserved by Technest
-                            <a href="{% url 'policy' %}">View Policy</a>
-                        </p>
-                    </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <p>© 2024 All Rights Reserved by Technest
+                        <a href="{% url 'policy' %}">View Policy</a>
+                    </p>
                 </div>
+            </div>
+        </div>
     </footer>
     <!-- end footer -->
     <!-- Javascript files-->
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
-    openEffect: "none",
-    closeEffect: "none"
-    });
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox({
+                openEffect: "none",
+                closeEffect: "none"
+            });
 
-    $(".zoom").hover(function () {
-
-    $(this).addClass('transition');
-    }, function () {
-
-    $(this).removeClass('transition');
-    });
-    });
+            $(".zoom").hover(function () {
+                $(this).addClass('transition');
+            }, function () {
+                $(this).removeClass('transition');
+            });
+        });
     </script>
     {% block extra_scripts %}{% endblock %}
 </body>
