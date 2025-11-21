@@ -3,49 +3,110 @@
 
 {% block title %}Sign Up - Technest{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/auth.css' %}">
-{% endblock %}
-
-{% block body_class %}auth-page{% endblock %}
-
 {% block content %}
-<div class="auth-container">
-    <h2 class="auth-title">Sign Up</h2>
 
-    {% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-            {{ message }}
+<!-- Circuit Divider -->
+<div class="circuit-divider" style="margin-top: 80px;"></div>
+
+<!-- Sign Up Section -->
+<section style="padding: 4rem 0; min-height: 70vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="glass-card">
+                    <div class="text-center mb-xl">
+                        <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">
+                            Create <span class="neon-text">Account</span>
+                        </h1>
+                        <p style="color: var(--color-mid-gray);">Join the Technest community today</p>
+                    </div>
+
+                    <form method="POST" action="{% url 'sign_up' %}">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-6 mb-md">
+                                <label
+                                    style="color: var(--color-light-gray); margin-bottom: 0.5rem; display: block;">First
+                                    Name</label>
+                                <input type="text" name="first_name" required class="form-control" placeholder="John"
+                                    style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm); width: 100%;">
+                            </div>
+
+                            <div class="col-md-6 mb-md">
+                                <label
+                                    style="color: var(--color-light-gray); margin-bottom: 0.5rem; display: block;">Last
+                                    Name</label>
+                                <input type="text" name="last_name" required class="form-control" placeholder="Doe"
+                                    style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm); width: 100%;">
+                            </div>
+                        </div>
+
+                        <div class="mb-md">
+                            <label
+                                style="color: var(--color-light-gray); margin-bottom: 0.5rem; display: block;">Username</label>
+                            <input type="text" name="username" required class="form-control"
+                                placeholder="Choose a username"
+                                style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm); width: 100%;">
+                        </div>
+
+                        <div class="mb-md">
+                            <label style="color: var(--color-light-gray); margin-bottom: 0.5rem; display: block;">Email
+                                Address</label>
+                            <input type="email" name="email" required class="form-control"
+                                placeholder="john@example.com"
+                                style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm); width: 100%;">
+                        </div>
+
+                        <div class="mb-md">
+                            <label
+                                style="color: var(--color-light-gray); margin-bottom: 0.5rem; display: block;">Password</label>
+                            <input type="password" name="password1" required class="form-control"
+                                placeholder="Create a strong password"
+                                style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm); width: 100%;">
+                        </div>
+
+                        <div class="mb-md">
+                            <label
+                                style="color: var(--color-light-gray); margin-bottom: 0.5rem; display: block;">Confirm
+                                Password</label>
+                            <input type="password" name="password2" required class="form-control"
+                                placeholder="Confirm your password"
+                                style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm); width: 100%;">
+                        </div>
+
+                        <div style="margin-bottom: 2rem;">
+                            <label
+                                style="color: var(--color-mid-gray); display: flex; align-items: start; cursor: pointer;">
+                                <input type="checkbox" name="terms" required
+                                    style="margin-right: 0.5rem; margin-top: 0.25rem;">
+                                <span>I agree to the <a href="{% url 'policy' %}"
+                                        style="color: var(--color-neon-cyan); text-decoration: none;">Terms &
+                                        Conditions</a> and <a href="{% url 'policy' %}"
+                                        style="color: var(--color-neon-cyan); text-decoration: none;">Privacy
+                                        Policy</a></span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-futuristic" style="width: 100%; margin-bottom: 1rem;">
+                            Create Account
+                        </button>
+
+                        <div class="text-center">
+                            <p style="color: var(--color-mid-gray);">
+                                Already have an account?
+                                <a href="{% url 'sign_in' %}"
+                                    style="color: var(--color-neon-cyan); text-decoration: none;">Sign In</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        {% endfor %}
     </div>
-    {% endif %}
+</section>
 
-    <form method="post" class="auth-form">
-        {% csrf_token %}
-        <label for="username" class="auth-label">Username</label>
-        <input type="text" class="auth-input" id="username" name="username" placeholder="Choose a username" required>
+<!-- Circuit Divider -->
+<div class="circuit-divider"></div>
 
-        <label for="email" class="auth-label">Email</label>
-        <input type="email" class="auth-input" id="email" name="email" placeholder="Enter your email" required>
-
-        <label for="password" class="auth-label">Password</label>
-        <input type="password" class="auth-input" id="password" name="password" placeholder="Enter your password"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-            required>
-
-        <label for="confirm-password" class="auth-label">Confirm Password</label>
-        <input type="password" class="auth-input" id="confirm-password" name="confirm-password"
-            placeholder="Confirm your password" required>
-
-        <button type="submit" class="auth-btn">Sign Up</button>
-    </form>
-
-    <div class="auth-toggle">
-        Already have an account? <a href="{% url 'sign_in' %}">Login here</a>
-    </div>
-</div>
 {% endblock %}

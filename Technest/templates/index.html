@@ -2,252 +2,203 @@
 {% load static %}
 
 {% block content %}
-<section class="slider_section">
-    <div id="myCarousel" class="carousel slide banner-main" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="first-slide" src="{% static 'images/banner-01.jpg' %}" alt="First slide">
-                <div class="container">
-                    <div class="carousel-caption relative">
-                        <span>Best Sellers</span>
-                        <h1>High quality</h1>
-                        <p>Discover our top picks that everyone’s talking about!
-                            <br> These high-quality items are the most popular for a reason—crafted with care, style,
-                            and durability, they offer unbeatable value
-                        </p>
-                        <a class="buynow" href="{% url 'contact' %}">Buy Now</a>
-                        <ul class="social_icon">
-                            <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                            <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="second-slide" src="{% static 'images/banner-01.jpg' %}" alt="Second slide">
-                <div class="container">
-                    <div class="carousel-caption relative">
-                        <span>Best Sellers </span>
-                        <h1>Fast Delivery</h1>
-                        <p>Get your hands on your favorites in no time!
-                            <br>With our fast and reliable delivery service, you can enjoy quick shipping right to your
-                            doorstep
-                        </p>
-                        <a class="buynow" href="#">Buy Now</a>
-                        <ul class="social_icon">
-                            <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                            <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="third-slide" src="{% static 'images/banner-01.jpg' %}" alt="Third slide">
-                <div class="container">
-                    <div class="carousel-caption relative">
-                        <span>Best Sellers </span>
-                        <h1>Affordable Prices</h1>
-                        <p>Quality doesn't have to break the bank!
-                            <br> With our affordable options, you can enjoy great value without sacrificing style or
-                            performance
-                        </p>
-                        <a class="buynow" href="{% url 'contact' %}">Buy Now</a>
-                        <ul class="social_icon">
-                            <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                            <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+
+<!-- Hero Section -->
+<section class="hero-futuristic">
+    <div class="hero-content slide-in">
+        <h1 class="hero-title">Welcome to TECHNEST</h1>
+        <p class="hero-subtitle">Experience the Future of Technology</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+            <a href="{% url 'products' %}" class="btn-futuristic">Explore Products</a>
+            <a href="{% url 'about' %}" class="btn-outline">Learn More</a>
         </div>
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-            <i class='fa fa-angle-left'></i>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-            <i class='fa fa-angle-right'></i>
-        </a>
     </div>
 </section>
 
-<!-- about -->
-<div class="about">
+<!-- Circuit Divider -->
+<div class="circuit-divider"></div>
+
+<!-- Featured Products Section -->
+<section style="padding: 4rem 0; background: var(--color-space-gray);">
     <div class="container">
-        <div class="row">
-            <div class="col-xl-5 col-lg-5 col-md-5 co-sm-l2">
-                <div class="about_img">
-                    <figure><img src="{% static 'images/about.png' %}" alt="img" /></figure>
+        <div class="text-center mb-xl">
+            <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+                <span class="neon-text">Featured</span> Products
+            </h2>
+            <p style="color: var(--color-mid-gray); font-size: 1.1rem;">Discover our top picks in cutting-edge
+                technology</p>
+        </div>
+
+        <div class="grid-futuristic">
+            {% for product in products|slice:":6" %}
+            <div class="product-card-futuristic slide-in" data-product-id="{{ product.id }}">
+                <div style="position: relative; overflow: hidden;">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                    {% else %}
+                    <img src="{% static 'images/Samsung S8.png' %}" alt="placeholder" />
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    <p style="color: var(--color-mid-gray); margin-bottom: 1rem;">{{ product.desc|truncatewords:15 }}
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="product-price">${{ product.price }}</span>
+                        <div class="quantity-container" style="display: flex; gap: 0.5rem; align-items: center;">
+                            <button class="quantity-btn minus-btn"
+                                style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; width: 30px; height: 30px; border-radius: 4px; cursor: pointer;">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1"
+                                style="width: 50px; text-align: center; background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 4px; border-radius: 4px;">
+                            <button class="quantity-btn plus-btn"
+                                style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; width: 30px; height: 30px; border-radius: 4px; cursor: pointer;">+</button>
+                        </div>
+                    </div>
+                    <button class="btn-futuristic add-to-cart-btn" style="width: 100%; margin-top: 1rem;">Add to
+                        Cart</button>
                 </div>
             </div>
-            <div class="col-xl-7 col-lg-7 col-md-7 co-sm-l2">
-                <div class="about_box">
-                    <h3>About Us</h3>
-                    <span>Why Choose Us?</span>
-                    <p>What sets Technest apart is our commitment to excellence and customer satisfaction. Our team of
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-xl">
+            <a href="{% url 'products' %}" class="btn-outline">View All Products</a>
+        </div>
+    </div>
+</section>
+
+<!-- Circuit Divider -->
+<div class="circuit-divider"></div>
+
+<!-- About Section -->
+<section style="padding: 4rem 0;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="glass-card float-animation">
+                    <img src="{% static 'images/about.png' %}" alt="About Technest"
+                        style="width: 100%; border-radius: var(--radius-md);" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="padding-left: 2rem;">
+                    <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+                        About <span class="neon-text">TECHNEST</span>
+                    </h2>
+                    <h3 style="color: var(--color-electric-blue); font-size: 1.5rem; margin-bottom: 1.5rem;">Why Choose
+                        Us?</h3>
+                    <p style="color: var(--color-light-gray); line-height: 1.8; margin-bottom: 2rem;">
+                        What sets Technest apart is our commitment to excellence and customer satisfaction. Our team of
                         tech enthusiasts stays up-to-date with the latest trends and innovations to provide you with
                         informed recommendations. We offer competitive prices, genuine products, excellent after-sales
-                        support, and a warranty on all our devices. Whether you're a tech enthusiast or looking for your
-                        first smartphone, Technest is here to ensure you make the right choice with confidence.</p>
+                        support, and a warranty on all our devices.
+                    </p>
+                    <a href="{% url 'about' %}" class="btn-futuristic">Learn More</a>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-<!-- end about -->
+</section>
 
-<div class="brand">
+<!-- Circuit Divider -->
+<div class="circuit-divider"></div>
+
+<!-- Customer Feedback Section -->
+<section style="padding: 4rem 0; background: var(--color-space-gray);">
     <div class="container">
-        <div class="brand-bg">
-            <div class="container">
-                <div class="row">
-                    {% for product in products|slice:":6" %}
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 margin">
-                        <div class="brand_box" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}"
-                            data-product-price="{{ product.price }}">
-                            {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}" />
-                            {% else %}
-                            <img src="{% static 'images/Samsung S8.png' %}" alt="placeholder" />
-                            {% endif %}
-                            <h3>$<strong class="red">{{ product.price }}</strong></h3>
-                            <span>{{ product.name }}</span>
-                            <i><img src="{% static 'images/star.png' %}" /></i>
-                            <i><img src="{% static 'images/star.png' %}" /></i>
-                            <i><img src="{% static 'images/star.png' %}" /></i>
-                            <i><img src="{% static 'images/star.png' %}" /></i>
-                            <!-- Quantity control and Add to Cart -->
-                            <div class="quantity-container">
-                                <button class="quantity-btn minus-btn">-</button>
-                                <input type="number" class="quantity-input" value="1" min="1">
-                                <button class="quantity-btn plus-btn">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">Add to Cart</button>
+        <div class="text-center mb-xl">
+            <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+                Customer <span class="neon-text">Feedback</span>
+            </h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="glass-card slide-in" style="height: 100%;">
+                    <div style="text-align: center;">
+                        <h4 style="color: var(--color-neon-cyan); font-size: 1.3rem; margin-bottom: 0.5rem;">Rachel
+                            Phelps</h4>
+                        <p style="color: var(--color-electric-blue); margin-bottom: 1rem;">iPhone</p>
+                        <p style="color: var(--color-light-gray); line-height: 1.6;">
+                            "Fast delivery, great packaging, and excellent customer service. Highly recommend!"
+                        </p>
+                        <div style="margin-top: 1.5rem;">
+                            <span style="color: var(--color-neon-cyan);">★★★★★</span>
                         </div>
                     </div>
-                    {% endfor %}
-
-                    <div class="col-md-12">
-                        <a class="read-more" href="{% url 'products' %}">See More</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="glass-card slide-in" style="height: 100%;">
+                    <div style="text-align: center;">
+                        <h4 style="color: var(--color-neon-cyan); font-size: 1.3rem; margin-bottom: 0.5rem;">Nigel Lukes
+                        </h4>
+                        <p style="color: var(--color-electric-blue); margin-bottom: 1rem;">Xiaomi</p>
+                        <p style="color: var(--color-light-gray); line-height: 1.6;">
+                            "The customer support team went above and beyond to help me with my purchase. I'll
+                            definitely be back for more!"
+                        </p>
+                        <div style="margin-top: 1.5rem;">
+                            <span style="color: var(--color-neon-cyan);">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="glass-card slide-in" style="height: 100%;">
+                    <div style="text-align: center;">
+                        <h4 style="color: var(--color-neon-cyan); font-size: 1.3rem; margin-bottom: 0.5rem;">Polly Keels
+                        </h4>
+                        <p style="color: var(--color-electric-blue); margin-bottom: 1rem;">Samsung S8</p>
+                        <p style="color: var(--color-light-gray); line-height: 1.6;">
+                            "Even after all these years, the display and build quality of the S8 make it feel like a
+                            flagship device."
+                        </p>
+                        <div style="margin-top: 1.5rem;">
+                            <span style="color: var(--color-neon-cyan);">★★★★★</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- clients -->
-    <div class="clients">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titlepage">
-                        <h2>Customer Feedback</h2>
-                    </div>
-                </div>
-            </div>
+<!-- Circuit Divider -->
+<div class="circuit-divider"></div>
+
+<!-- Contact Section -->
+<section style="padding: 4rem 0;">
+    <div class="container">
+        <div class="text-center mb-xl">
+            <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+                Get In <span class="neon-text">Touch</span>
+            </h2>
         </div>
-    </div>
-    <div class="clients_red">
-        <div class="container">
-            <div id="testimonial_slider" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ul class="carousel-indicators">
-                    <li data-target="#testimonial_slider" data-slide-to="0" class=""></li>
-                    <li data-target="#testimonial_slider" data-slide-to="1" class="active"></li>
-                    <li data-target="#testimonial_slider" data-slide-to="2" class=""></li>
-                </ul>
-                <!-- The slideshow -->
-                <div class="carousel-inner">
-                    <div class="carousel-item">
-                        <div class="testomonial_section">
-                            <div class="full center">
-                            </div>
-                            <div class="full testimonial_cont text_align_center cross_layout">
-                                <div class="cross_inner">
-                                    <h3>Rachel Phelps<br><strong class="ornage_color">Iphone</strong></h3>
-                                    <p>Fast delivery, great packaging, and excellent customer service. Highly
-                                        recommend!</i>
-                                    </p>
-                                    <div class="full text_align_center margin_top_30">
-                                        <img src="{% static 'icon/testimonial_qoute.png' %}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="carousel-item active">
-
-                        <div class="testomonial_section">
-                            <div class="full center">
-                            </div>
-                            <div class="full testimonial_cont text_align_center cross_layout">
-                                <div class="cross_inner">
-                                    <h3>Nigel Lukes<br><strong class="ornage_color">Xiaomi</strong></h3>
-                                    <p>The customer support team went above and beyond to help me with my purchase. I’ll
-                                        definitely be back for more!</i>
-                                    </p>
-                                    <div class="full text_align_center margin_top_30">
-                                        <img src="{% static 'icon/testimonial_qoute.png' %}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="carousel-item">
-
-                        <div class="testomonial_section">
-                            <div class="full center">
-                            </div>
-                            <div class="full testimonial_cont text_align_center cross_layout">
-                                <div class="cross_inner">
-                                    <h3>Polly Keels<br><strong class="ornage_color">Samsung S8</strong></h3>
-                                    <p>Even after all these years, the display and build quality of the S8 make it feel
-                                        like a flagship device</i>
-                                    </p>
-                                    <div class="full text_align_center margin_top_30">
-                                        <img src="{% static 'icon/testimonial_qoute.png' %}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-    <!-- end clients -->
-    <!-- contact -->
-    <div class="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titlepage">
-                        <h2>Contact us</h2>
-                    </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="glass-card">
                     <form class="main_form">
                         <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <input class="form-control" placeholder="Your name" type="text" name="Your Name">
+                            <div class="col-md-6 mb-md">
+                                <input class="form-control" placeholder="Your name" type="text" name="Your Name"
+                                    style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm);">
                             </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <input class="form-control" placeholder="Email" type="text" name="Email">
+                            <div class="col-md-6 mb-md">
+                                <input class="form-control" placeholder="Email" type="text" name="Email"
+                                    style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm);">
                             </div>
-                            <div class=" col-md-12">
-                                <input class="form-control" placeholder="Phone" type="text" name="Phone">
+                            <div class="col-md-12 mb-md">
+                                <input class="form-control" placeholder="Phone" type="text" name="Phone"
+                                    style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm);">
                             </div>
-                            <div class="col-md-12">
-                                <textarea class="textarea" placeholder="Message"></textarea>
+                            <div class="col-md-12 mb-md">
+                                <textarea class="form-control" placeholder="Message" rows="5"
+                                    style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm);"></textarea>
                             </div>
-                            <div class=" col-md-12">
-                                <button class="send">Send</button>
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn-futuristic">Send Message</button>
                             </div>
                         </div>
                     </form>
@@ -255,98 +206,79 @@
             </div>
         </div>
     </div>
-    <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-    </div>
-    <!-- end contact -->
-    {% endblock %}
+</section>
 
-    {% block extra_scripts %}
-    <script>
-        $(document).ready(function () {
-            $(".fancybox").fancybox({
-                openEffect: "none",
-                closeEffect: "none"
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Handle quantity buttons
+        document.querySelectorAll('.quantity-container').forEach(container => {
+            const minusBtn = container.querySelector('.minus-btn');
+            const plusBtn = container.querySelector('.plus-btn');
+            const quantityInput = container.querySelector('.quantity-input');
+
+            plusBtn.addEventListener('click', function () {
+                quantityInput.value = parseInt(quantityInput.value) + 1;
             });
 
-            $(".zoom").hover(function () {
-
-                $(this).addClass('transition');
-            }, function () {
-
-                $(this).removeClass('transition');
+            minusBtn.addEventListener('click', function () {
+                if (parseInt(quantityInput.value) > 1) {
+                    quantityInput.value = parseInt(quantityInput.value) - 1;
+                }
             });
         });
-    </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Handle quantity buttons
-            document.querySelectorAll('.quantity-container').forEach(container => {
-                const minusBtn = container.querySelector('.minus-btn');
-                const plusBtn = container.querySelector('.plus-btn');
-                const quantityInput = container.querySelector('.quantity-input');
+        // Handle add to cart
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const productBox = this.closest('.product-card-futuristic');
+                const quantity = productBox.querySelector('.quantity-input').value;
+                const productId = productBox.dataset.productId;
 
-                plusBtn.addEventListener('click', function () {
-                    quantityInput.value = parseInt(quantityInput.value) + 1;
-                });
-
-                minusBtn.addEventListener('click', function () {
-                    if (parseInt(quantityInput.value) > 1) {
-                        quantityInput.value = parseInt(quantityInput.value) - 1;
-                    }
-                });
-            });
-
-            // Handle add to cart
-            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-                button.addEventListener('click', function () {
-                    const productBox = this.closest('.brand_box');
-                    const quantity = productBox.querySelector('.quantity-input').value;
-                    const productId = productBox.dataset.productId;
-
-                    // Send AJAX request to Django
-                    fetch('/add_to_cart/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': getCookie('csrftoken')
-                        },
-                        body: JSON.stringify({
-                            product_id: productId,
-                            quantity: quantity
-                        })
+                // Send AJAX request to Django
+                fetch('/add_to_cart/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify({
+                        product_id: productId,
+                        quantity: quantity
                     })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.status === 'success') {
-                                alert('Product added to cart successfully!');
-                            } else {
-                                alert('Error adding product to cart');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            alert('Product added to cart successfully!');
+                        } else {
                             alert('Error adding product to cart');
-                        });
-                });
-            });
-
-            // Helper function to get CSRF token
-            function getCookie(name) {
-                let cookieValue = null;
-                if (document.cookie && document.cookie !== '') {
-                    const cookies = document.cookie.split(';');
-                    for (let i = 0; i < cookies.length; i++) {
-                        const cookie = cookies[i].trim();
-                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
                         }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error adding product to cart');
+                    });
+            });
+        });
+
+        // Helper function to get CSRF token
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
                     }
                 }
-                return cookieValue;
             }
-        });
-    </script>
-    {% endblock %}
+            return cookieValue;
+        }
+    });
+</script>
+{% endblock %}

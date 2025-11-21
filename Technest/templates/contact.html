@@ -1,211 +1,118 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <!-- basic -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- mobile metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <!-- site metas -->
-    <title>Technest</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
-     <!-- bootstrap css -->
-     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-     <!-- style css -->
-     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-     <!-- Responsive-->
-     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-     <!-- favicon -->
-     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/gif" />
-     <!-- Scrollbar Custom CSS -->
-     <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
-     <!-- Tweaks for older IEs-->
-     <link rel="stylesheet" href="{% static 'https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' %}">
-     <!-- owl stylesheets -->
-     <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' %}">
-     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-     <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-     <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css' %}" media="screen">
-     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-</head>
-<!-- body -->
+{% block title %}Contact Us - Technest{% endblock %}
 
-<body class="main-layout">
-    <!-- loader  -->
-    <div class="loader_bg">
-        <div class="loader"><img src="{% static 'images/loading.gif' %}" alt="#" /></div>
-    </div>
-    <!-- end loader -->
-    <!-- header -->
-    <header>
-        <!-- header inner -->
-        <div class="header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                        <div class="full">
-                            <div class="center-desk">
-                                <div class="logo">
-                                    <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                        <div class="menu-area">
-                            <div class="limit-box">
-                                <nav class="main-menu">
-                                    <ul class="menu-area-main">
-                                        <li class="active"> <a href="{% url 'index' %}">Home</a> </li>
-                                        <li> <a href="{% url 'about' %}">About</a> </li>
-                                        <li><a href="{% url 'products' %}">Product</a></li>
-                                        <li><a href="{% url 'cart' %}">cart</a></li>
-                                        <li><a href="{% url 'contact' %}">Contact Us</a></li>                                        <li class="last">
-                                        <li class="last">
-                                            <a href="#"><img src="{% static 'images/search_icon.png' %}" alt="icon" /></a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 offset-md-6">
-                        <div class="location_icon_bottum">
-                            <ul>
-                                <li><img src="{% static 'icon/call.png' %}" /> (+960) 9921632</li>
-                                <li><img src="{% static 'icon/email.png' %}" /> Technest@gmail.com</li>
-                                <li><img src="{% static 'icon/loc.png' %}" /> Rhombus Street</li>                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{% block content %}
+
+<!-- Circuit Divider -->
+<div class="circuit-divider" style="margin-top: 80px;"></div>
+
+<!-- Contact Hero Section -->
+<section style="padding: 4rem 0;">
+    <div class="container">
+        <div class="text-center mb-xl">
+            <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 1rem;">
+                Get In <span class="neon-text">Touch</span>
+            </h1>
+            <p style="color: var(--color-mid-gray); font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
+                Have questions? We're here to help. Reach out to us anytime!
+            </p>
         </div>
-        <!-- end header inner -->
-    </header>
-    <!-- end header -->
-    <div class="brand_color">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titlepage">
-                        <h2>Contact Us</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
+</section>
 
-    <!-- contact -->
-    <div class="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
+<!-- Circuit Divider -->
+<div class="circuit-divider"></div>
 
-                    <form class="main_form">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <input class="form-control" placeholder="Your name" type="text" name="Your Name">
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                <input class="form-control" placeholder="Email" type="text" name="Email">
-                            </div>
-                            <div class=" col-md-12">
-                                <input class="form-control" placeholder="Phone" type="text" name="Phone">
-                            </div>
-                            <div class="col-md-12">
-                                <textarea class="textarea" placeholder="Message"></textarea>
-                            </div>
-                            <div class=" col-md-12">
-                                <button class="send">Send</button>
-                            </div>
+<!-- Contact Form Section -->
+<section style="padding: 4rem 0; background: var(--color-space-gray);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-md">
+                <div class="glass-card" style="height: 100%;">
+                    <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">
+                        Send Us a <span class="neon-text">Message</span>
+                    </h2>
+                    <form method="POST" action="{% url 'contact' %}">
+                        {% csrf_token %}
+                        <div class="mb-md">
+                            <label style="color: var(--color-light-gray); margin-bottom: 0.5rem; display: block;">Your
+                                Name</label>
+                            <input type="text" name="name" required class="form-control" placeholder="John Doe"
+                                style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm); width: 100%;">
                         </div>
+                        <div class="mb-md">
+                            <label style="color: var(--color-light-gray); margin-bottom: 0.5rem; display: block;">Email
+                                Address</label>
+                            <input type="email" name="email" required class="form-control"
+                                placeholder="john@example.com"
+                                style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm); width: 100%;">
+                        </div>
+                        <div class="mb-md">
+                            <label style="color: var(--color-light-gray); margin-bottom: 0.5rem; display: block;">Phone
+                                Number</label>
+                            <input type="tel" name="phone" class="form-control" placeholder="+960 123 4567"
+                                style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm); width: 100%;">
+                        </div>
+                        <div class="mb-md">
+                            <label
+                                style="color: var(--color-light-gray); margin-bottom: 0.5rem; display: block;">Message</label>
+                            <textarea name="message" required rows="5" class="form-control"
+                                placeholder="How can we help you?"
+                                style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 12px; border-radius: var(--radius-sm); width: 100%; resize: vertical;"></textarea>
+                        </div>
+                        <button type="submit" class="btn-futuristic" style="width: 100%;">Send Message</button>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-      </div>
-    <!-- end contact -->
+            <div class="col-md-6">
+                <div class="glass-card" style="height: 100%;">
+                    <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">
+                        Contact <span class="neon-text">Information</span>
+                    </h2>
 
-    <!-- footer -->
-    <footer>
-        <div id="contact" class="footer">
-            <div class="container">
-                <div class="row pdn-top-30">
-                    <div class="col-md-12 ">
-                        <div class="footer-box">
-                            <div class="headinga">
-                                <h3>Address</h3>
-                                <span>Rhombus Street</span>
-                                <p>(+960) 9921632
-                                    <br>Technest@gmail.com</p>
+                    <div style="margin-bottom: 2rem;">
+                        <div style="display: flex; align-items: start; margin-bottom: 1.5rem;">
+                            <div style="font-size: 1.5rem; color: var(--color-neon-cyan); margin-right: 1rem;">📍</div>
+                            <div>
+                                <h4 style="color: var(--color-neon-cyan); margin-bottom: 0.5rem;">Address</h4>
+                                <p style="color: var(--color-light-gray);">Rhombus Street<br>Maldives</p>
                             </div>
-                            <ul class="location_icon">
-                                <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
-                                <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </div>
 
-                            </ul>
-                            <div class="menu-bottom">
-                                <ul class="link">
-                                    <li><a href="{% url 'index' %}">Home</a></li>
-                                    <li><a href="{% url 'about' %}">About</a></li>
-                                    <li><a href="{% url 'products' %}">Product</a></li>
-                                    <li><a href="{% url 'cart' %}">cart</a></li>
-                                    <li><a href="{% url 'contact' %}">Contact us</a></li>
-                                </ul>
+                        <div style="display: flex; align-items: start; margin-bottom: 1.5rem;">
+                            <div style="font-size: 1.5rem; color: var(--color-electric-blue); margin-right: 1rem;">📞
+                            </div>
+                            <div>
+                                <h4 style="color: var(--color-electric-blue); margin-bottom: 0.5rem;">Phone</h4>
+                                <p style="color: var(--color-light-gray);">(+960) 9921632</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: start; margin-bottom: 1.5rem;">
+                            <div style="font-size: 1.5rem; color: var(--color-neon-cyan); margin-right: 1rem;">✉️</div>
+                            <div>
+                                <h4 style="color: var(--color-neon-cyan); margin-bottom: 0.5rem;">Email</h4>
+                                <p style="color: var(--color-light-gray);">Technest@gmail.com</p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <div class="container">
-                    <p>© 2024 All Rights Reserved, Technest</p>
+
+                    <div style="border-top: 1px solid var(--glass-border); padding-top: 2rem;">
+                        <h4 style="color: var(--color-light-gray); margin-bottom: 1rem;">Business Hours</h4>
+                        <p style="color: var(--color-mid-gray); margin-bottom: 0.5rem;">Monday - Friday: 9:00 AM - 6:00
+                            PM</p>
+                        <p style="color: var(--color-mid-gray); margin-bottom: 0.5rem;">Saturday: 10:00 AM - 4:00 PM</p>
+                        <p style="color: var(--color-mid-gray);">Sunday: Closed</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
-    <!-- end footer -->
-    <!-- Javascript files-->
-   <script src="{% static 'js/jquery.min.js' %}"></script>
-   <script src="{% static 'js/popper.min.js' %}"></script>
-   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-   <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
-   <script src="{% static 'js/plugin.js' %}"></script>
-   <!-- sidebar -->
-   <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
-   <script src="{% static 'js/custom.js' %}"></script>
-   <!-- javascript -->
-   <script src="{% static 'js/owl.carousel.js' %}"></script>
-   <script src="{% static 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js' %}"></script>
-   <script>
-        $(document).ready(function() {
-            $(".fancybox").fancybox({
-                openEffect: "none",
-                closeEffect: "none"
-            });
+    </div>
+</section>
 
-            $(".zoom").hover(function() {
+<!-- Circuit Divider -->
+<div class="circuit-divider"></div>
 
-                $(this).addClass('transition');
-            }, function() {
-
-                $(this).removeClass('transition');
-            });
-        });
-    </script>
-</body>
-
-</html>
+{% endblock %}

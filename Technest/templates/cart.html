@@ -4,103 +4,139 @@
 {% block title %}Cart - Technest{% endblock %}
 
 {% block content %}
-<!-- Cart Section -->
-<div class="brand_color">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="titlepage">
-                    <h2>Your Cart</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="cart-section">
+<!-- Circuit Divider -->
+<div class="circuit-divider" style="margin-top: 80px;"></div>
+
+<!-- Cart Section -->
+<section style="padding: 4rem 0; min-height: 70vh;">
     <div class="container">
+        <div class="text-center mb-xl">
+            <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 1rem;">
+                Your <span class="neon-text">Cart</span>
+            </h1>
+        </div>
+
+        {% if cart_items %}
         <div class="row">
             <!-- Cart Items -->
-            <div class="col-md-8">
-                <div class="cart-items">
-                    {% if cart_items %}
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Total</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for item in cart_items %}
-                            <tr>
-                                <td>
-                                    <div class="cart-item">
-                                        {% if item.product.image %}
-                                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
-                                            class="cart-img">
-                                        {% else %}
-                                        <img src="{% static 'images/no-image.png' %}" alt="{{ item.product.name }}"
-                                            class="cart-img">
-                                        {% endif %}
-                                        <span>{{ item.product.name }}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <form action="{% url 'update_cart' item.product.id %}" method="POST"
-                                        class="update-cart-form">
-                                        {% csrf_token %}
-                                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1"
-                                            class="form-control quantity-input" onchange="this.form.submit()">
-                                    </form>
-                                </td>
-                                <td>${{ item.product.price }}</td>
-                                <td>${{ item.total_price }}</td>
-                                <td>
-                                    <form action="{% url 'remove_from_cart' item.product.id %}" method="POST">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    {% else %}
-                    <div class="empty-cart text-center py-5">
-                        <i class="fa fa-shopping-cart fa-4x mb-3"></i>
-                        <h3>Your cart is empty</h3>
-                        <p>Browse our products and add items to your cart!</p>
-                        <a href="{% url 'products' %}" class="btn btn-primary mt-3">Continue Shopping</a>
+            <div class="col-md-8 mb-md">
+                {% for item in cart_items %}
+                <div class="glass-card slide-in" style="margin-bottom: 1.5rem;">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            {% if item.product.image %}
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                                style="width: 100%; border-radius: var(--radius-sm);">
+                            {% else %}
+                            <img src="{% static 'images/Samsung S8.png' %}}" alt="{{ item.product.name }}"
+                                style="width: 100%; border-radius: var(--radius-sm);">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-9">
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div>
+                                    <h3
+                                        style="color: var(--color-neon-cyan); font-size: 1.5rem; margin-bottom: 0.5rem;">
+                                        {{ item.product.name }}</h3>
+                                    <p style="color: var(--color-mid-gray); margin-bottom: 1rem;">{{
+                                        item.product.desc|truncatewords:15 }}</p>
+                                    <p style="color: var(--color-light-gray); font-size: 1.3rem; font-weight: 600;">${{
+                                        item.product.price }} each</p>
+                                </div>
+                                <form action="{% url 'remove_from_cart' item.product.id %}" method="POST"
+                                    style="display: inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-outline"
+                                        style="padding: 8px 16px; font-size: 0.9rem; background: transparent; border: 1px solid #ff4444; color: #ff4444;">
+                                        Remove
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem;">
+                                <form action="{% url 'update_cart' item.product.id %}" method="POST"
+                                    style="display: flex; align-items: center; gap: 0.5rem;">
+                                    {% csrf_token %}
+                                    <label style="color: var(--color-light-gray);">Quantity:</label>
+                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1"
+                                        max="{{ item.product.stock }}"
+                                        style="width: 80px; background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 8px; border-radius: var(--radius-sm); text-align: center;">
+                                    <button type="submit" class="btn-futuristic"
+                                        style="padding: 8px 20px; font-size: 0.9rem;">Update</button>
+                                </form>
+                                <div style="margin-left: auto;">
+                                    <p style="color: var(--color-mid-gray); margin-bottom: 0.25rem;">Subtotal:</p>
+                                    <p style="color: var(--color-neon-cyan); font-size: 1.5rem; font-weight: 700;">${{
+                                        item.total_price }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    {% endif %}
                 </div>
+                {% endfor %}
             </div>
 
             <!-- Cart Summary -->
             <div class="col-md-4">
-                <div class="cart-summary">
-                    <h3>Summary</h3>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <span>Subtotal:</span> <span class="float-right">${{ cart_total }}</span>
-                        </li>
-                        <li class="list-group-item">
-                            <span>Tax (10%):</span> <span class="float-right">${{ tax_amount }}</span>
-                        </li>
-                        <li class="list-group-item">
-                            <span>Total:</span> <span class="float-right">${{ total_with_tax }}</span>
-                        </li>
-                    </ul>
-                    {% if cart_items %}
-                    <a href="{% url 'checkout' %}" class="btn btn-primary btn-block mt-3">Proceed to Checkout</a>
-                    {% endif %}
+                <div class="glass-card" style="position: sticky; top: 100px;">
+                    <h3 style="color: var(--color-neon-cyan); font-size: 1.8rem; margin-bottom: 1.5rem;">Order Summary
+                    </h3>
+
+                    <div
+                        style="border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem; margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: var(--color-light-gray);">Subtotal:</span>
+                            <span style="color: var(--color-light-gray);">${{ total_price }}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: var(--color-light-gray);">Shipping:</span>
+                            <span style="color: var(--color-neon-cyan);">FREE</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="color: var(--color-light-gray);">Tax:</span>
+                            <span style="color: var(--color-light-gray);">$0.00</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span
+                                style="color: var(--color-light-gray); font-size: 1.2rem; font-weight: 600;">Total:</span>
+                            <span style="color: var(--color-neon-cyan); font-size: 2rem; font-weight: 700;">${{
+                                total_price }}</span>
+                        </div>
+                    </div>
+
+                    <a href="{% url 'checkout' %}" class="btn-futuristic"
+                        style="width: 100%; display: block; text-align: center; text-decoration: none;">
+                        Proceed to Checkout
+                    </a>
+                    <a href="{% url 'products' %}" class="btn-outline"
+                        style="width: 100%; display: block; text-align: center; text-decoration: none; margin-top: 1rem;">
+                        Continue Shopping
+                    </a>
                 </div>
             </div>
         </div>
+        {% else %}
+        <!-- Empty Cart -->
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="glass-card text-center" style="padding: 3rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🛒</div>
+                    <h3 style="color: var(--color-neon-cyan); margin-bottom: 1rem;">Your Cart is Empty</h3>
+                    <p style="color: var(--color-mid-gray); margin-bottom: 2rem;">Looks like you haven't added any items
+                        to your cart yet.</p>
+                    <a href="{% url 'products' %}" class="btn-futuristic">Start Shopping</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
-</div>
+</section>
+
+<!-- Circuit Divider -->
+<div class="circuit-divider"></div>
+
 {% endblock %}

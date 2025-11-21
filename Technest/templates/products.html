@@ -4,49 +4,170 @@
 {% block title %}Products - Technest{% endblock %}
 
 {% block content %}
-<div class="brand">
+
+<!-- Circuit Divider -->
+<div class="circuit-divider" style="margin-top: 80px;"></div>
+
+<!-- Products Section -->
+<section style="padding: 4rem 0; min-height: 80vh;">
     <div class="container">
-        <div class="brand-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="titlepage">
-                            <h2>Our Products</h2>
+        <div class="text-center mb-xl">
+            <h2 style="font-size: 3rem; font-weight: 700; margin-bottom: 1rem;">
+                Our <span class="neon-text">Products</span>
+            </h2>
+            <p style="color: var(--color-mid-gray); font-size: 1.1rem;">Discover our complete collection of cutting-edge
+                technology</p>
+        </div>
+
+        <div class="grid-futuristic">
+            {% for product in products %}
+            <div class="product-card-futuristic slide-in" data-product-id="{{ product.id }}">
+                <div style="position: relative; overflow: hidden;">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                        style="width: 100%; height: 250px; object-fit: cover; border-radius: var(--radius-md);" />
+                    {% else %}
+                    <img src="{% static 'images/Samsung S8.png' %}" alt="placeholder"
+                        style="width: 100%; height: 250px; object-fit: cover; border-radius: var(--radius-md);" />
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    <p style="color: var(--color-mid-gray); margin-bottom: 1rem; min-height: 60px;">{{
+                        product.desc|truncatewords:20 }}</p>
+
+                    <!-- Stock Status -->
+                    {% if product.stock > 0 %}
+                    <p style="color: var(--color-neon-cyan); font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        ✓ In Stock ({{ product.stock }} available)
+                    </p>
+                    {% else %}
+                    <p style="color: #ff4444; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        ✗ Out of Stock
+                    </p>
+                    {% endif %}
+
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <span class="product-price">${{ product.price }}</span>
+                        <div style="display: flex; gap: 0.25rem;">
+                            <span style="color: var(--color-neon-cyan); font-size: 1.2rem;">★★★★★</span>
                         </div>
                     </div>
-                    {% for product in products %}
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 margin">
-                        <div class="brand_box" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}"
-                            data-product-price="{{ product.price }}">
-                            {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}" />
-                            {% else %}
-                            <img src="{% static 'images/Samsung S8.png' %}" alt="placeholder" />
-                            {% endif %}
-                            <h3>$<strong class="red">{{ product.price }}</strong></h3>
-                            <span>{{ product.name }}</span>
-                            <i><img src="{% static 'images/star.png' %}" /></i>
-                            <i><img src="{% static 'images/star.png' %}" /></i>
-                            <i><img src="{% static 'images/star.png' %}" /></i>
-                            <i><img src="{% static 'images/star.png' %}" /></i>
-                            <!-- Quantity control and Add to Cart -->
-                            <div class="quantity-container">
-                                <button class="quantity-btn minus-btn">-</button>
-                                <input type="number" class="quantity-input"
-                                    value="{{ product.cart_quantity|default:1 }}" min="1">
-                                <button class="quantity-btn plus-btn">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">Add to Cart</button>
-                        </div>
+
+                    {% if product.stock > 0 %}
+                    <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                        <button class="quantity-btn minus-btn"
+                            style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; width: 35px; height: 35px; border-radius: 4px; cursor: pointer; font-size: 1.2rem;">-</button>
+                        <input type="number" class="quantity-input" value="1" min="1" max="{{ product.stock }}"
+                            style="width: 60px; text-align: center; background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; padding: 6px; border-radius: 4px; font-size: 1rem;">
+                        <button class="quantity-btn plus-btn"
+                            style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; width: 35px; height: 35px; border-radius: 4px; cursor: pointer; font-size: 1.2rem;">+</button>
                     </div>
-                    {% empty %}
-                    <div class="col-12 text-center">
-                        <p class="text-muted">No products available at the moment.</p>
-                    </div>
-                    {% endfor %}
+                    <button class="btn-futuristic add-to-cart-btn" style="width: 100%;">Add to Cart</button>
+                    {% else %}
+                    <button class="btn-futuristic" style="width: 100%; opacity: 0.5; cursor: not-allowed;" disabled>Out
+                        of Stock</button>
+                    {% endif %}
                 </div>
             </div>
+            {% empty %}
+            <div class="col-12 text-center" style="grid-column: 1 / -1;">
+                <div class="glass-card" style="padding: 3rem;">
+                    <h3 style="color: var(--color-neon-cyan); margin-bottom: 1rem;">No Products Available</h3>
+                    <p style="color: var(--color-mid-gray);">Check back soon for new arrivals!</p>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
-</div>
+</section>
+
+<!-- Circuit Divider -->
+<div class="circuit-divider"></div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Handle quantity buttons
+        document.querySelectorAll('.quantity-container, .product-card-futuristic').forEach(container => {
+            const minusBtn = container.querySelector('.minus-btn');
+            const plusBtn = container.querySelector('.plus-btn');
+            const quantityInput = container.querySelector('.quantity-input');
+
+            if (plusBtn && minusBtn && quantityInput) {
+                plusBtn.addEventListener('click', function () {
+                    const max = parseInt(quantityInput.getAttribute('max')) || 999;
+                    const current = parseInt(quantityInput.value);
+                    if (current < max) {
+                        quantityInput.value = current + 1;
+                    }
+                });
+
+                minusBtn.addEventListener('click', function () {
+                    if (parseInt(quantityInput.value) > 1) {
+                        quantityInput.value = parseInt(quantityInput.value) - 1;
+                    }
+                });
+            }
+        });
+
+        // Handle add to cart
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const productBox = this.closest('.product-card-futuristic');
+                const quantity = productBox.querySelector('.quantity-input').value;
+                const productId = productBox.dataset.productId;
+
+                // Send AJAX request to Django
+                fetch('/add_to_cart/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify({
+                        product_id: productId,
+                        quantity: quantity
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // Show success message with neon effect
+                            const msg = document.createElement('div');
+                            msg.style.cssText = 'position: fixed; top: 100px; right: 20px; background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--color-neon-cyan); padding: 1rem 2rem; border-radius: 8px; color: white; z-index: 9999; box-shadow: 0 0 20px var(--color-cyan-glow);';
+                            msg.textContent = '✓ Product added to cart!';
+                            document.body.appendChild(msg);
+                            setTimeout(() => msg.remove(), 3000);
+                        } else {
+                            alert('Error adding product to cart');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error adding product to cart');
+                    });
+            });
+        });
+
+        // Helper function to get CSRF token
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    });
+</script>
 {% endblock %}

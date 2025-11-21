@@ -1,0 +1,525 @@
+/* ========================================
+   FUTURISTIC MINIMALIST DESIGN SYSTEM
+   ======================================== */
+
+/* CSS Custom Properties */
+:root {
+    /* Colors - Dark Base */
+    --color-carbon: #0a0a0a;
+    --color-space-gray: #1a1a1a;
+    --color-dark-surface: #141414;
+
+    /* Colors - Neon Accents */
+    --color-neon-cyan: #00f0ff;
+    --color-electric-blue: #0066ff;
+    --color-cyan-glow: rgba(0, 240, 255, 0.5);
+    --color-blue-glow: rgba(0, 102, 255, 0.5);
+
+    /* Colors - Neutrals */
+    --color-white: #ffffff;
+    --color-light-gray: #f0f0f0;
+    --color-mid-gray: #888888;
+
+    /* Glass Effect */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: 20px;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /* Shadows */
+    --shadow-glow-cyan: 0 0 20px var(--color-cyan-glow);
+    --shadow-glow-blue: 0 0 20px var(--color-blue-glow);
+    --shadow-glow-intense: 0 0 30px var(--color-neon-cyan), 0 0 60px var(--color-cyan-glow);
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--color-carbon);
+    color: var(--color-white);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'SF Pro Display', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   GLASSMORPHISM COMPONENTS
+   ======================================== */
+
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    transition: all var(--transition-normal);
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-neon-cyan);
+    box-shadow: var(--shadow-glow-cyan);
+    transform: translateY(-5px);
+}
+
+/* ========================================
+   NEON EFFECTS
+   ======================================== */
+
+.neon-border {
+    border: 2px solid var(--color-neon-cyan);
+    box-shadow: var(--shadow-glow-cyan);
+}
+
+.neon-text {
+    color: var(--color-neon-cyan);
+    text-shadow: 0 0 10px var(--color-cyan-glow);
+}
+
+.neon-glow {
+    box-shadow: var(--shadow-glow-cyan);
+}
+
+.neon-glow-intense {
+    box-shadow: var(--shadow-glow-intense);
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px var(--color-cyan-glow);
+    }
+
+    50% {
+        box-shadow: 0 0 40px var(--color-neon-cyan), 0 0 80px var(--color-cyan-glow);
+    }
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.btn-futuristic {
+    background: linear-gradient(135deg, var(--color-electric-blue), var(--color-neon-cyan));
+    color: var(--color-white);
+    border: none;
+    padding: 12px 32px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-futuristic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left var(--transition-slow);
+}
+
+.btn-futuristic:hover::before {
+    left: 100%;
+}
+
+.btn-futuristic:hover {
+    box-shadow: var(--shadow-glow-intense);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--color-neon-cyan);
+    color: var(--color-neon-cyan);
+    padding: 12px 32px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.btn-outline:hover {
+    background: var(--color-neon-cyan);
+    color: var(--color-carbon);
+    box-shadow: var(--shadow-glow-cyan);
+}
+
+/* ========================================
+   NAVBAR
+   ======================================== */
+
+.navbar-futuristic {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--glass-border);
+    padding: var(--spacing-sm) 0;
+}
+
+.navbar-futuristic::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-neon-cyan), transparent);
+}
+
+.nav-link-futuristic {
+    color: var(--color-light-gray);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.nav-link-futuristic::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--color-neon-cyan);
+    transition: width var(--transition-normal);
+}
+
+.nav-link-futuristic:hover,
+.nav-link-futuristic.active {
+    color: var(--color-neon-cyan);
+}
+
+.nav-link-futuristic:hover::after,
+.nav-link-futuristic.active::after {
+    width: 80%;
+}
+
+/* ========================================
+   CIRCUIT LINE DIVIDERS
+   ======================================== */
+
+.circuit-divider {
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--color-neon-cyan) 25%,
+            var(--color-electric-blue) 50%,
+            var(--color-neon-cyan) 75%,
+            transparent 100%);
+    margin: var(--spacing-xl) 0;
+    position: relative;
+    animation: circuit-flow 3s linear infinite;
+}
+
+@keyframes circuit-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+.circuit-divider::before,
+.circuit-divider::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--color-neon-cyan);
+    border-radius: 50%;
+    box-shadow: var(--shadow-glow-cyan);
+}
+
+.circuit-divider::before {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.circuit-divider::after {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* ========================================
+   PRODUCT CARDS
+   ======================================== */
+
+.product-card-futuristic {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+.product-card-futuristic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--radius-lg);
+    padding: 2px;
+    background: linear-gradient(135deg, var(--color-neon-cyan), var(--color-electric-blue));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.product-card-futuristic:hover::before {
+    opacity: 1;
+}
+
+.product-card-futuristic:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-glow-cyan);
+}
+
+.product-card-futuristic img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.product-card-futuristic:hover img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: var(--spacing-md);
+}
+
+.product-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-white);
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-neon-cyan);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* ========================================
+   GRID LAYOUTS
+   ======================================== */
+
+.grid-futuristic {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+
+.hero-futuristic {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-carbon) 0%, var(--color-space-gray) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-futuristic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 50%, var(--color-cyan-glow) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, var(--color-blue-glow) 0%, transparent 50%);
+    opacity: 0.3;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 1;
+    padding: var(--spacing-xl);
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    background: linear-gradient(135deg, var(--color-white), var(--color-neon-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--color-mid-gray);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.float-animation {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in {
+    animation: slide-in 0.6s ease-out;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .grid-futuristic {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.mb-sm {
+    margin-bottom: var(--spacing-sm);
+}
+
+.mb-md {
+    margin-bottom: var(--spacing-md);
+}
+
+.mb-lg {
+    margin-bottom: var(--spacing-lg);
+}
+
+.mb-xl {
+    margin-bottom: var(--spacing-xl);
+}
+
+.mt-sm {
+    margin-top: var(--spacing-sm);
+}
+
+.mt-md {
+    margin-top: var(--spacing-md);
+}
+
+.mt-lg {
+    margin-top: var(--spacing-lg);
+}
+
+.mt-xl {
+    margin-top: var(--spacing-xl);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
