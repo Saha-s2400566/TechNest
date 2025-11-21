@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy - Technest{% endblock %}
+
+{% block extra_css %}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/policy.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="policy-header" data-aos="fade-down">
+  <i class="fa fa-shield policy-icon"></i>
+  <div>Privacy Policy</div>
+</header>
+
+<section class="policy-section" data-aos="fade-up">
+  <div class="policy-card" data-aos="fade-right">
+    <i class="fa fa-info-circle policy-icon"></i>
+    <h2 class="policy-title">Introduction</h2>
+    <p class="policy-text">At TechNest, we value your privacy and are committed to safeguarding the personal data you
+      share with us. This privacy policy outlines how we collect, use, store, and protect your personal information. We
+      gather data through both offline and online channels, including when you use our website (www.technest.com),
+      mobile applications, and other related services (collectively referred to as the "Site").</p>
+  </div>
+
+  <div class="policy-card" data-aos="fade-left">
+    <i class="fa fa-database policy-icon"></i>
+    <h2 class="policy-title">Data Collection and Use</h2>
+    <p class="policy-text">By interacting with our services and using our Site, you acknowledge and agree that we may
+      collect, store, and process your personal data. This data may include, but is not limited to, personal details
+      such as your name, email address, and usage data such as browsing behavior and device information. We use this
+      information to enhance your experience, personalize content, and improve our services.</p>
+  </div>
+
+  <div class="policy-card" data-aos="fade-right">
+    <i class="fa fa-link policy-icon"></i>
+    <h2 class="policy-title">Third-Party Links</h2>
+    <p class="policy-text">The TechNest Site may contain links to third-party websites or services. These external sites
+      may collect data independently. Please be aware that their privacy practices may differ from ours. We recommend
+      reviewing their privacy policies before sharing any personal information on these sites.</p>
+  </div>
+
+  <div class="policy-card" data-aos="fade-left">
+    <i class="fa fa-exclamation-triangle policy-icon"></i>
+    <h2 class="policy-title">Disclaimer for Third-Party Websites</h2>
+    <p class="policy-text">TechNest is not responsible for the content, privacy practices, or security measures of any
+      third-party websites linked from our Site. When you visit these external sites, you do so at your own risk, and we
+      encourage you to read their privacy policies and terms of service carefully.</p>
+  </div>
+</section>
+
+<div class="back-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+    once: true
+  });
+
+  // Back to top button functionality
+  window.onscroll = function () {
+    const backToTop = document.querySelector('.back-to-top');
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  };
+
+  document.querySelector('.back-to-top').addEventListener('click', function () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+</script>
+{% endblock %}

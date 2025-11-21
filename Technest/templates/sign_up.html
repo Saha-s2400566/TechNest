@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign Up - Technest{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block body_class %}auth-page{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2 class="auth-title">Sign Up</h2>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+        <label for="username" class="auth-label">Username</label>
+        <input type="text" class="auth-input" id="username" name="username" placeholder="Choose a username" required>
+
+        <label for="email" class="auth-label">Email</label>
+        <input type="email" class="auth-input" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="password" class="auth-label">Password</label>
+        <input type="password" class="auth-input" id="password" name="password" placeholder="Enter your password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+            required>
+
+        <label for="confirm-password" class="auth-label">Confirm Password</label>
+        <input type="password" class="auth-input" id="confirm-password" name="confirm-password"
+            placeholder="Confirm your password" required>
+
+        <button type="submit" class="auth-btn">Sign Up</button>
+    </form>
+
+    <div class="auth-toggle">
+        Already have an account? <a href="{% url 'sign_in' %}">Login here</a>
+    </div>
+</div>
+{% endblock %}

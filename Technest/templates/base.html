@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>{% block title %}Technest{% endblock %}</title>
+    <meta name="keywords" content="technology, innovation, Technest">
+    <meta name="description" content="Technest is your go-to solution for innovative tech solutions and services.">
+    <meta name="author" content="Technest Team">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- style css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Responsive -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- favicon -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <!-- Scrollbar Custom CSS -->
+</head>
+
+<!-- body -->
+
+<body class="main-layout {% block body_class %}{% endblock %}">
+
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="{% static 'images/loading.gif' %}" alt="#" /></div>
+    </div>
+    <!-- end loader -->
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-labelledby="cookieBannerMessage"
+        style="display: none;">
+        <button class="close" onclick="closeBanner()" aria-label="Close cookie banner">×</button>
+        <p id="cookieBannerMessage">
+            This website utilizes technologies such as cookies to enable essential site functionality, as well as for
+            analytics, personalization, and targeted advertising. You may change your settings at any time or accept the
+            default settings.
+            <a href="{% url 'policy' %}" aria-label="Read our Privacy Policy">Privacy Policy</a>
+        </p>
+        <div class="button-group">
+            <button onclick="managePreferences()" aria-label="Manage cookie preferences">Manage Preferences</button>
+            <button class="accept-all" onclick="acceptAll()" aria-label="Accept all cookies">Accept All</button>
+            <button onclick="rejectAll()" aria-label="Reject all non-essential cookies">Reject All</button>
+        </div>
+    </div>
+
+    <script>
+        // Check cookie consent status when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!getCookie('cookieConsent')) {
+                document.getElementById('cookieBanner').style.display = 'block';
+            }
+        });
+
+        function managePreferences() {
+            // Simulate opening a preferences modal
+            setCookie('cookieConsent', 'essential', 365);
+            alert("Manage preferences clicked.");
+            closeBanner();
+        }
+
+        function acceptAll() {
+            setCookie('cookieConsent', 'all', 365);
+            alert("All cookies accepted.");
+            closeBanner();
+        }
+
+        function rejectAll() {
+            setCookie('cookieConsent', 'essential', 365);
+            alert("Only essential cookies accepted.");
+            closeBanner();
+        }
+
+        function closeBanner() {
+            document.getElementById('cookieBanner').style.display = 'none';
+        }
+
+        // Helper function to set cookies
+        function setCookie(name, value, days) {
+            let expires = '';
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = '; expires=' + date.toUTCString();
+            }
+            document.cookie = `${name}=${value || ''}${expires}; path=/; SameSite=Lax`;
+        }
+
+        // Helper function to get cookies
+        function getCookie(name) {
+            const nameEQ = `${name}=`;
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+    </script>
+
+    <!-- header -->
+    <header>
+        <!-- header inner -->
+        <div class="header">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                        <div class="full">
+                            <div class="center-desk">
+                                <div class="logo">
+                                    <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}"
+                                            alt="Technest Logo"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                        <div class="menu-area">
+                            <div class="limit-box">
+                                <nav class="main-menu">
+                                    <ul class="menu-area-main">
+                                        <li
+                                            class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                                            <a href="{% url 'index' %}">Home</a>
+                                        </li>
+                                        <li
+                                            class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                                            <a href="{% url 'about' %}">About</a>
+                                        </li>
+                                        <li
+                                            class="{% if request.resolver_match.url_name == 'products' %}active{% endif %}">
+                                            <a href="{% url 'products' %}">Product</a>
+                                        </li>
+                                        <li class="{% if request.resolver_match.url_name == 'cart' %}active{% endif %}">
+                                            <a href="{% url 'cart' %}">Cart</a>
+                                        </li>
+                                        <li
+                                            class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                                            <a href="{% url 'contact' %}">Contact Us</a>
+                                        </li>
+                                        <li class="last">
+                                            <a href="{% url 'products' %}"><img
+                                                    src="{% static 'images/search_icon.png' %}" alt="icon" /></a>
+                                        </li>
+                                        {% if user.is_authenticated %}
+                                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                                        {% else %}
+                                        <li><a href="{% url 'sign_in' %}">Login</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end header inner -->
+    </header>
+    <!-- end header -->
+
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- footer -->
+    <footer>
+        <div id="contact" class="footer">
+            <div class="container">
+                <div class="row pdn-top-30">
+                    <div class="col-md-12 ">
+                        <div class="footer-box">
+                            <div class="headinga">
+                                <h3>Address</h3>
+                                <span>Rhombus Street</span>
+                                <p>(+960) 9921632
+                                    <br>Technest@gmail.com
+                                </p>
+                            </div>
+                            <ul class="location_icon">
+                                <li> <a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+
+                            </ul>
+                            <div class="menu-bottom">
+                                <ul class="link">
+                                    <li><a href="{% url 'index' %}">Home</a></li>
+                                    <li><a href="{% url 'about' %}">About</a></li>
+                                    <li><a href="{% url 'products' %}">Product</a></li>
+                                    <li><a href="{% url 'cart' %}">Cart</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <div class="container">
+                        <p>© 2024 All Rights Reserved by Technest
+                            <a href="{% url 'policy' %}">View Policy</a>
+                        </p>
+                    </div>
+                </div>
+    </footer>
+    <!-- end footer -->
+    <!-- Javascript files-->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    openEffect: "none",
+    closeEffect: "none"
+    });
+
+    $(".zoom").hover(function () {
+
+    $(this).addClass('transition');
+    }, function () {
+
+    $(this).removeClass('transition');
+    });
+    });
+    </script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+
+</html>

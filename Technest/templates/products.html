@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Products - Technest{% endblock %}
+
+{% block content %}
+<div class="brand">
+    <div class="container">
+        <div class="brand-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titlepage">
+                            <h2>Our Products</h2>
+                        </div>
+                    </div>
+                    {% for product in products %}
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 margin">
+                        <div class="brand_box" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}"
+                            data-product-price="{{ product.price }}">
+                            {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                            {% else %}
+                            <img src="{% static 'images/Samsung S8.png' %}" alt="placeholder" />
+                            {% endif %}
+                            <h3>$<strong class="red">{{ product.price }}</strong></h3>
+                            <span>{{ product.name }}</span>
+                            <i><img src="{% static 'images/star.png' %}" /></i>
+                            <i><img src="{% static 'images/star.png' %}" /></i>
+                            <i><img src="{% static 'images/star.png' %}" /></i>
+                            <i><img src="{% static 'images/star.png' %}" /></i>
+                            <!-- Quantity control and Add to Cart -->
+                            <div class="quantity-container">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <input type="number" class="quantity-input"
+                                    value="{{ product.cart_quantity|default:1 }}" min="1">
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-btn">Add to Cart</button>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12 text-center">
+                        <p class="text-muted">No products available at the moment.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
