@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from decimal import Decimal
 from .utils import CartService
 import json
-from .models import Product, Wishlist, ProductReview, Category
+from .models import Product, Wishlist, ProductReview, Category, Cart
 from django.db import models
 from .forms import ProductReviewForm, CustomUserCreationForm
 
