@@ -1,0 +1,49 @@
+/* ========================================
+   CART COUNTER BADGE
+   ======================================== */
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: linear-gradient(135deg, #ff0055, #ff4466);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    box-shadow: 0 0 10px rgba(255, 0, 85, 0.6), 0 0 20px rgba(255, 0, 85, 0.3);
+    animation: badge-pulse 2s ease-in-out infinite;
+    z-index: 10;
+    border: 2px solid var(--color-carbon);
+}
+
+.cart-badge.has-items {
+    display: inline-flex !important;
+}
+
+@keyframes badge-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 0, 85, 0.6), 0 0 20px rgba(255, 0, 85, 0.3);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(255, 0, 85, 0.8), 0 0 30px rgba(255, 0, 85, 0.5);
+    }
+}
+
+/* Cart link with badge container */
+.cart-link-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}

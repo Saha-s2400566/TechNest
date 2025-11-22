@@ -347,3 +347,15 @@ def submit_review(request, product_id):
         review.save()
         return JsonResponse({'status': 'success', 'message': 'Review submitted'})
     return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
+
+def cart_count(request):
+    """Return the number of items in the cart"""
+    if request.user.is_authenticated:
+        count = Cart.objects.filter(user=request.user, is_active=True).aggregate(
+            total=models.Sum('quantity')
+        )['total'] or 0
+    else:
+        cart = request.session.get('cart', {})
+        count = sum(cart.values()) if cart else 0
+    
+    return JsonResponse({'count': count})

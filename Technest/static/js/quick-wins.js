@@ -367,6 +367,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => {
                     if (data.status === 'success') {
                         toast.success('Product added to cart!');
+                        document.dispatchEvent(new Event('cartUpdated'));
                     } else {
                         toast.error(data.message || 'Error adding product to cart');
                     }
